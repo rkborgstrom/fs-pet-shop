@@ -3,19 +3,20 @@
 
 let fs = require('fs');
 let path = require('path');
+//takes us to current directory and joins the pets.json file.
 let petsPath = path.join(__dirname, 'pets.json');
 
-let http = require('http');
-let port = process.env.PORT || 8000;
+let http = require('http'); //used to include modules that exist in separate files.
+let port = process.env.PORT || 8000;  //represents the state of the system environment your application is when it starts. 
 
-let server = http.createServer(function(req, res) {
-  if (req.method === 'GET' && (req.url === '/pets/' || req.url === '/pets')) {
+let server = http.createServer(function(req, res) {  //createServer turns computer into an HTTP server.
+  if (req.method === 'GET' && (req.url === '/pets/' || req.url === '/pets')) {  //allows user to type in /pets/ or /pets.
     fs.readFile(petsPath, 'utf8', function(err, petsJSON) {
       if (err) {
         console.error(err.stack);
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'text/plain');
-        return res.end('Internal Server Error');
+        res.statusCode = 500; 
+        res.setHeader('Content-Type', 'GET localhost:8000/petstext/plain');
+        return res.end('Internal Server Error'); //ends response process. 
       }
 
       res.setHeader('Content-Type', 'application/json');
@@ -26,9 +27,9 @@ let server = http.createServer(function(req, res) {
     fs.readFile(petsPath, 'utf8', function(err, petsData) {
       if (err) {
         console.error(err.stack);
-        res.statusCode = 500;
+        res.statusCode = 500; //if an error, return error 500
         res.setHeader('Content-Type', 'text/plain');
-        return res.end('Internal Server Error');
+        return res.end('Internal Server Error'); //ends response process. 
       }
 
       let pets = JSON.parse(petsData);
@@ -38,6 +39,7 @@ let server = http.createServer(function(req, res) {
       res.end(petsJSON);
     });
   }
+  
   else if (req.method === 'GET' && req.url === '/pets/1') {
     fs.readFile(petsPath, 'utf8', function(err, petsData) {
       if (err) {
@@ -55,12 +57,14 @@ let server = http.createServer(function(req, res) {
     });
   }
   else {
-    res.statusCode = 404;
+    res.statusCode = 404; //if nothing ^ is working, return code 404.
     res.setHeader('Content-Type', 'text/plain');
-    res.end('Not found');
+    res.end('Not Found');
   }
 });
 
 server.listen(port, function() {
   console.log('Listening on port', port);
 });
+
+module.exports = server;
