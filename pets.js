@@ -5,7 +5,6 @@ let fs = require('fs');
 // path module handles and transforms file modules
 let path = require('path');
 let petsPath = path.join(__dirname, 'pets.json');
-let server = require('httpServer.js');
 // let commands = ["read", "create", "update", "destroy"];
 let commands = ['read', 'create', 'update', 'destroy'];
 // console.log(typeof (petsPath));
