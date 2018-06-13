@@ -23,7 +23,7 @@ app.get('/pets/', function(req, res) {
   });
 });
 
-app.get('/pets/0', function(req, res) {
+app.get('/pets/:id', function(req, res) {
   fs.readFile(petsPath, 'utf8', function(err, petsData){
     if (err) {
       console.error(err.stack);
@@ -37,7 +37,7 @@ app.get('/pets/0', function(req, res) {
       return res.sendStatus(404);
     }
 
-    res.set('Content-Type', 'text/json');
+    res.set('Content-Type', 'application/json');
     res.send(pets[id]);
   });
 });
@@ -51,4 +51,3 @@ app.listen(port, function() {
 });
 
 module.exports = app;
-
