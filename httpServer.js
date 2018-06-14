@@ -67,4 +67,8 @@ server.listen(port, function() {
   console.log('Listening on port', port);
 });
 
+<<<<<<< HEAD
 module.exports = server;
+=======
+module.exports = server;
+>>>>>>> 06d13104523a4bf8efeedb4d89821012eaad9d2e
